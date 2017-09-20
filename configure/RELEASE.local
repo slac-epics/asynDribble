@@ -27,7 +27,7 @@ ASYN_MODULE_VERSION = R4.30-1.1.1
 #  or
 # FOO = /Full/Path/To/Development/Version 
 # ==========================================================
-ASYN = $(EPICS_MODULES)/asyn/$(FOO_MODULE_VERSION)
+ASYN = $(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
 
 # Set EPICS_BASE last so it appears last in the DB, DBD, INCLUDE, and LIB search paths
 EPICS_BASE              = $(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)

@@ -1,39 +1,16 @@
 # RELEASE
 # Defines location of external products
-include $(TOP)/RELEASE_SITE
+-include $(TOP)/../configure/RELEASE_PATHS.local
+-include $(TOP)/../configure/RELEASE_PATHS.local.$(EPICS_HOST_ARCH)
+-include $(TOP)/../configure/RELEASE_LIBS.local
+-include $(TOP)/RELEASE.local
+-include $(TOP)/configure/RELEASE.local
 
-# ===============================================================
-# Define the location and version of EPICS base
-# ===============================================================
-BASE_MODULE_VERSION=R3.15.5-1.0
-EPICS_BASE=$(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
-
-# ===============================================================
-# Define the version of modules needed by
-# IOC apps or other Support apps
-# ===============================================================
-#AUTOSAVE_MODULE_VERSION=R4.2.1.2-2.7.0
-#IOCADMIN_MODULE_VERSION=R3.0.0-1.6.0
-#ASYN_MODULE_VERSION=R4.19.0-0.1.0
-#STREAMDEVICE_MODULE_VERSION=R2.5-0.3.1
-
-ASYN_MODULE_VERSION=R4.30-1.1.1
-#STREAMDEVICE_MODULE_VERSION=R2.7.7-1.0
-
-# ============================================================
-# External Support module path definitions
-#
-# If any of these macros expand to a path which
-# contains an "include" directory, that directory will be
-# included in the compiler include path.
-#
-# If any of these macros expand to a path which
-# contains a "lib/<arch>" directory, that directory will be
-# included in the compiler link path for that architecture.
-#
-# If your build fails, look for these paths in your build output
-# ============================================================
-#AUTOSAVE=$(EPICS_MODULES)/autosave/$(AUTOSAVE_MODULE_VERSION)
-#IOCADMIN=$(EPICS_MODULES)/iocAdmin/$(IOCADMIN_MODULE_VERSION)
-ASYN=$(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
-#STREAMDEVICE=$(EPICS_MODULES)/streamdevice/$(STREAMDEVICE_MODULE_VERSION)
+# Test for required macros
+# These should be defined by one of the above local RELEASE variants
+ifeq ($(wildcard $(EPICS_BASE)/lib/$(T_A)),)
+$(error EPICS_BASE path not found: $(EPICS_BASE)/lib/$(T_A))
+endif
+ifeq ($(wildcard $(ASYN)/lib/$(T_A)),)
+$(error ASYN path not found: $(ASYN)/lib/$(T_A))
+endif
